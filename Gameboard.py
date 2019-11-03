@@ -10,10 +10,12 @@ class Grid:
         self.grid = [[c.Empty for row in range(c.width)] for col in range(c.height)]
 
     def displayGrid(self):
-        colHead = ("ABCDEFGHIJK")[:c.width]
-        rowNum = ("12345678910")[:c.height]
+
+        colHead = ("  ABCDEFGHIJ\n")
+        rowHead = [' 1', ' 2', ' 3', ' 4', ' 5', ' 6', ' 7', ' 8', ' 9', '10']
         print (" ".join(colHead))
         for row in range(c.height):
+            print(str(rowHead[row]), end="  ")    
             for col in range(c.width):
                 currentCell = self.grid[row][col]
                 if currentCell == c.liveShip:
@@ -24,7 +26,7 @@ class Grid:
 
     def isRowFree(self, row, col, size):
         gridIsEmpty = []
-        for i in range(size):
+        for _ in range(size):
             if self.insideRowCheck(row) and self.insideColCheck(col):
                 if self.grid[row][col] == c.Empty:
                     gridIsEmpty.append((row,col))
@@ -40,7 +42,7 @@ class Grid:
 
     def isColumnFree(self, row, col, size):
         gridIsEmpty = []
-        for i in range(size):
+        for _ in range(size):
                 if self.insideColCheck(col) and self.insideRowCheck(row):
                     if self.grid[row][col] == c.Empty:
                         gridIsEmpty.append((row,col))
@@ -55,12 +57,12 @@ class Grid:
             return False
 
     def shipPlacementRow(self, row, col, size):
-        for i in range(size):
+        for _ in range(size):
             self.grid[row][col] = c.liveShip
             row += 1
         
     def shipPlacementCol(self,row,col,size):
-        for i in range(size):
+        for _ in range(size):
             self.grid[row][col] = c.liveShip
             col +=1
             
