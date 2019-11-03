@@ -8,12 +8,11 @@ class Player:
     
     """Holds properties of the player.""" 
     
-    shipList = {"Battleship": 5, "Destroyer1": 3, "Destroyer2": 3}
+    shipList = {"Battleship": 5, "Destroyer1": 4, "Destroyer2": 4}
 
     def __init__(self):
         self.grid = Gameboard.Grid()
         self.enemySquad = []
-        #self.name = name 
 
     def placeShips(self):
         shipPositions = ["V", "H"]
@@ -52,7 +51,7 @@ class Player:
         self.viewGrid()
         while True:
             try:
-                userInput = input("\nPick a shot please:").upper()
+                userInput = input("\nEnter your shot coordinates: ").upper()
                 if not userInput:
                     raise ValueError
                 else:
@@ -71,7 +70,7 @@ class Player:
         try: 
             if self.grid.insideRowCheck(row) and self.grid.insideColCheck(col):
                 if self.grid.grid[row][col] == c.liveShip: 
-                    print("\nA HIT!!!\n")
+                    print("\nDirect Hit!!\n")
                     self.grid.grid[row][col] = c.Hit
                     self.isHit(row,col)
                 else:
@@ -101,7 +100,7 @@ class Player:
                 aShip.shipLocation.remove((row, col))
                 if aShip.shipStatus():
                     self.enemySquad.remove(aShip)
-                    print("You have sunk a ship \n")            
+                    print("\nYou have sunk a ship!!\n")            
 
     def sinkShips(self):
         shipCount = 0
@@ -115,4 +114,4 @@ class Player:
             return False
 
     def winMessage(self):
-        print("Congratulations, you have sunk all of the enemy ships!")
+        print("\nCongratulations, you have sunk all of the enemy ships!\n")
