@@ -4,13 +4,16 @@ import Ships
 import Constants
 
 class StartGame:
+
+    """Runs game when executed """
+
     def __init__(self):
         self.playGame()
 
     def playGame(self):
         p = User.Player()
         p.placeShips()
-        check = True 
+        check = True
         while check is True:
             p.fireShot()
             if p.sinkShips() is True:
